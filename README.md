@@ -1,2 +1,2 @@
 # eDNA-fishery-metabarcoding
-scripts used in analysing Nanopore reads metabarcoding
+Script used to analyse Nanopore reads from eDNA catch water project
