@@ -3,7 +3,7 @@ library(tidyverse)
 library(ggpubr)
 ## uploading the final_data dataset used for the analyses (after threshold filtering)
 
-data_species<-read.csv('../analysis_mock/new_analysis_mock/final_species_May_similarityabundance.csv')%>% select(!1)%>%
+data_species<-read.csv('final_species.csv')%>% select(!1)%>%
   mutate(primer= ifelse(primer== 'mifish', 'MiFish',
       ifelse(primer== 'coi_NS', 'COI', 
               ifelse(primer== 'fish_NS', 'fish-2kb', 
