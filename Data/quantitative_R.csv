@@ -1,0 +1,9 @@
+species_name,primer,R2,p.value,n,label
+Gadus morhua,MiFish,0.5202,0.01707,9,p=0.01707
+Lophius piscatorius,COI,0.6328,0.006328,9,p=0.006328
+Lophius piscatorius,fish-2kb,0.7047,0.04759,5,p=0.04759
+Lophius piscatorius,MiFish,0.888,8.93E-05,9,p=0.00008934
+Glyptocephalus cynoglossus,MiFish,0.59,0.005746,10,p=0.005746
+Melanogrammus aeglefinus,COI,0.7507,0.00155,10,p=0.00155
+Melanogrammus aeglefinus,Metazoan,0.7334,0.004103,8,p=0.004103
+Nephrops norvegicus,COI,0.8038,2.04E-05,13,p=0.00002041
