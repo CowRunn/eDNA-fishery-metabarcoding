@@ -45,7 +45,8 @@ cat fish_*.fastq > final_reads/reads_fish_Sample_name.fastq
 
 mv final_reads ../
 
-######################################## Taxonomic assignment using MetONTIIME https://github.com/MaestSi/MetONTIIME
+## At this point the reads are ready for taxonomic assignment! We create four marker-specific folders and store the reads from each marker into the correct folder as MetONTIIME will be run in each folder
+######## Taxonomic assignment using MetONTIIME https://github.com/MaestSi/MetONTIIME
 nohup ./MetONTIIME.sh -w /home/saram/sda_HDD1/saram/ont_analysis/final_reads/coi_reads/coi_all_94 -f /home/saram/sda_HDD1/saram/ont_analysis/final_reads/coi_reads/coi_all_94/metadata.tsv -s /mnt/sda_HDD1/saram/NS_fish_database_unique/clean_unique_sequence.qza -t /mnt/sda_HDD1/saram/NS_fish_database_unique/clean_unique_taxonomy.qza -n 12 -c Blast -m 3 -q 0.8 -i 0.94 &
 nohup ./MetONTIIME.sh -w /home/saram/sda_HDD1/saram/ont_analysis/final_reads/mifish_reads/mifish_all_94/ -f /home/saram/sda_HDD1/saram/ont_analysis/final_reads/mifish_reads/mifish_all_94/metadata.tsv -s /mnt/sda_HDD1/saram/NS_fish_database_unique/clean_unique_sequence.qza -t /mnt/sda_HDD1/saram/NS_fish_database_unique/clean_unique_taxonomy.qza -n 12 -c Blast -m 3 -q 0.9 -i 0.94 &
 nohup ./MetONTIIME.sh -w /home/saram/sda_HDD1/saram/ont_analysis/replicates_final_reads/metazoan_replicates/metazoan_all_94 -f /home/saram/sda_HDD1/saram/ont_analysis/final_reads/metazoan_reads/metazoan_all_94/metadata.tsv -s /mnt/sda_HDD1/saram/NS_fish_database_unique/clean_unique_sequence.qza -t /mnt/sda_HDD1/saram/NS_fish_database_unique/clean_unique_taxonomy.qza -n 12 -c Blast -m 3 -q 0.2 -i 0.94 &
