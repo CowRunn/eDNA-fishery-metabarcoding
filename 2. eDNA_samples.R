@@ -137,3 +137,4 @@ fish_abundance_final<- rbind(fish_abundance_fam_no_flat, pleuronecitdae, lophius
 final_species<-rbind(mifish_abundance_final, metazoan_abundance_final, fish_abundance_final, coi_abundance)
 
 final_species<-final_species%>%filter(Species!= 'Triglidae', Species!='dab-Aplaice', Species!='had-whiting')
+write.csv (final_species, 'final_species.csv')
