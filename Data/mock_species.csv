@@ -1,0 +1,13 @@
+mock_species_common,species_name,read,primer
+Atlantic Cod,Gadus morhua,mock,mock_species
+Atlantic herring,Clupea harengus,mock,mock_species
+Turbot,Scophthalmus maximus,mock,mock_species
+Monkfish,Lophius piscatorius,mock,mock_species
+Mullet,Mullus surmuletus,mock,mock_species
+Thornback ray,Raja clavata,mock,mock_species
+Lesser spotted dogfish,Scyliorhinus canicula,mock,mock_species
+Atlantic hagfish,Myxine glutinosa,mock,mock_species
+Octopus,Eledone cirrhosa,mock,mock_species
+Oyster,Ostrea edulis,mock,mock_species
+Norway lobster,Nephrops norvegicus,mock,mock_species
+Blue-leg swimming crab,Liocarcinus depurator,mock,mock_species
