@@ -4,7 +4,7 @@ library(FSA)
 ## they are based on datasets created in the script figures_manuscript
 
 ## Figure S2
-taxonomy<-read.csv('../analysis_mock//midori_NS_database/taxonomy.csv')%>% select(!1)
+taxonomy<-read.csv('../analysis_mock/midori_NS_database/taxonomy.csv')%>% select(!1)
 mullet<- c('Chordata', 'Actinopteri', 'Mulliformes', 'Mullidae', 'Mullus', 'Mullus barbatus')
 taxonomy_2<- rbind(taxonomy, mullet)
 taxa_final_data_species<-left_join(final_data_species, taxonomy_2)%>% filter(species_name!= 'had-whit',  species_name!='dab-Ampla')%>%droplevels()
