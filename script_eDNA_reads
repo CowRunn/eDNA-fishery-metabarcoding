@@ -5,7 +5,7 @@ In the output folder of the MinION sequencing go to the fastq_pass folder
 
 cat *.fastq > raw_reads_Sample_name.fastq
 
-# Create a directory where to store the files
+# Create a directory where to store the reads
 mkdir /scratch/b.srm18crx/raw_data/Sample_name_analyses/reads_length_files
 cd /scratch/b.srm18crx/raw_data/Sample_name_analyses/reads_length_files
 
