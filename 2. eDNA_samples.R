@@ -38,7 +38,7 @@ NS_mifish_samples_2<-NS_mifish_samples%>% mutate(species_res= ifelse(is.na(Speci
 NS_mifish_samples_3<-rbind(NS_mifish_samples_2, mifish_unique_species)
 
 ## uploading information on the fishing haul (target species)
-target_species<-observed<-read.csv('../../../samples_diversity/samples_diversity_logbook_replicates.csv')%>% select(sample, Target_species)%>%distinct()%>% rename(target=Target_species)
+target_species<-observed<-read.csv('samples_diversity_logbook_replicates.csv')%>% select(sample, Target_species)%>%distinct()%>% rename(target=Target_species)
 
 #### calculating the relative abundance
 reads_number<- rbind(NS_metazoan_samples, NS_mifish_samples_3, NS_coi_samples, NS_fish_samples)
