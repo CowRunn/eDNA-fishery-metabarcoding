@@ -1,4 +1,11 @@
-create a directory where to store the files
+## This script was run on Linux
+the pipeline starts checking the quality of the reads in the fastq files (i.e., we analyse directly the fastq_pass files we do not perform basecalling)
+In the output folder of the MinION sequencing go to the fastq_pass folder 
+## For each sequencing run we merge the fastq files in the fastq_pass folder
+
+cat *.fastq > raw_reads_Sample_name.fastq
+
+# Create a directory where to store the files
 mkdir /scratch/b.srm18crx/raw_data/Sample_name_analyses/reads_length_files
 cd /scratch/b.srm18crx/raw_data/Sample_name_analyses/reads_length_files
 
