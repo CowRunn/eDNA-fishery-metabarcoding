@@ -1,0 +1,33 @@
+rule all:
+    input:
+        "coi_reads_length_Sample_name.fastq",
+        "output_plot_Sample_name"
+
+rule check_quality:
+    input:
+        fastq="Data/fastq/calvin_5A1.fastq"
+    output:
+        "output_plot_Sample_name"
+    conda:
+        "envs/qc.yaml"
+    log:
+        "logs/check_quality.log"
+    shell:
+        """
+        mkdir -p data/interim
+        (cd data/interim & NanoPlot --fastq {input} -o {output}) 2> {log}
+        """
+
+rule filter_reads:
+    input:
+        fastq="Data/fastq/calvin_5A1.fastq"
+    output:
+        "coi_reads_length_Sample_name.fastq"
+    conda:
+        "envs/qc.yaml"
+    log:
+        "logs/filter_reads.log"
+    shell:
+        """
+        NanoFilt {input} -l 345 --maxlength 500 -q 10 > {output} 2> {log}
+        """
