@@ -1,21 +1,20 @@
 rule all:
     input:
         "coi_reads_length_Sample_name.fastq",
-        "output_plot_Sample_name"
+        "data/interim/output_plot_Sample_name"
 
 rule check_quality:
     input:
         fastq="Data/fastq/calvin_5A1.fastq"
     output:
-        "output_plot_Sample_name"
+        directory("data/interim/output_plot_Sample_name")
     conda:
         "envs/qc.yaml"
     log:
         "logs/check_quality.log"
     shell:
         """
-        mkdir -p data/interim
-        (cd data/interim & NanoPlot --fastq {input} -o {output}) 2> {log}
+        NanoPlot --fastq {input.fastq} -o {output} 2> {log}
         """
 
 rule filter_reads:
@@ -29,5 +28,12 @@ rule filter_reads:
         "logs/filter_reads.log"
     shell:
         """
-        NanoFilt {input} -l 345 --maxlength 500 -q 10 > {output} 2> {log}
+        NanoFilt {input.fastq} -l 345 --maxlength 500 -q 10 > {output} 2> {log}
         """
+#### Cutadapt to remove the primer regions and retain only reads from which the primers were removed.
+mkdir /scratch/b.srm18crx/raw_data/Sample_name_analyses/cut_primers
+cd /scratch/b.srm18crx/raw_data/Sample_name_analyses/cut_primers
+## coi
+cutadapt -g GGWACWRGWTGRACWNTNTAYCCYCC...TGRTTYTTYGGNCAYCCNGARGTNTA -o coi_for_Sample_name.fastq ../reads_length_files/coi* -e 0.2 -m 293 -M 333 --discard-untrimmed
+cutadapt -g TANACYTCNGGRTGNCCRAARAAYCA...GGRGGRTANANWGTYCAWCYWGTWCC -o coi_reverse_Sample_name.fastq ../reads_length_files/coi* -e 0.2 -m 293 -M 333 --discard-untrimmed
+cat coi_*.fastq > final_reads/reads_coi_Sample_name.fastq
