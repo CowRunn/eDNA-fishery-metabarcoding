@@ -1,6 +1,6 @@
 rule all:
     input:
-        "coi_reads_length_Sample_name.fastq",
+        "final_reads/reads_coi_Sample_name.fastq",
         "data/interim/output_plot_Sample_name"
 
 rule check_quality:
@@ -30,10 +30,44 @@ rule filter_reads:
         """
         NanoFilt {input.fastq} -l 345 --maxlength 500 -q 10 > {output} 2> {log}
         """
-#### Cutadapt to remove the primer regions and retain only reads from which the primers were removed.
-mkdir /scratch/b.srm18crx/raw_data/Sample_name_analyses/cut_primers
-cd /scratch/b.srm18crx/raw_data/Sample_name_analyses/cut_primers
-## coi
-cutadapt -g GGWACWRGWTGRACWNTNTAYCCYCC...TGRTTYTTYGGNCAYCCNGARGTNTA -o coi_for_Sample_name.fastq ../reads_length_files/coi* -e 0.2 -m 293 -M 333 --discard-untrimmed
-cutadapt -g TANACYTCNGGRTGNCCRAARAAYCA...GGRGGRTANANWGTYCAWCYWGTWCC -o coi_reverse_Sample_name.fastq ../reads_length_files/coi* -e 0.2 -m 293 -M 333 --discard-untrimmed
-cat coi_*.fastq > final_reads/reads_coi_Sample_name.fastq
+
+rule cutadapt_forward:
+    input:
+        "coi_reads_length_Sample_name.fastq"
+    output:
+        "cut_primers/coi_for_Sample_name.fastq"
+    conda:
+        "envs/qc.yaml"
+    log:
+        "logs/cutadapt_forward.log"
+    shell:
+        """
+        cutadapt -g GGWACWRGWTGRACWNTNTAYCCYCC...TGRTTYTTYGGNCAYCCNGARGTNTA \
+        -o {output} {input} -e 0.2 -m 293 -M 333 --discard-untrimmed > {log} 2>&1
+        """
+
+rule cutadapt_reverse:
+    input:
+        "coi_reads_length_Sample_name.fastq"
+    output:
+        "cut_primers/coi_rev_Sample_name.fastq"
+    conda:
+        "envs/qc.yaml"
+    log:
+        "logs/cutadapt_reverse.log"
+    shell:
+        """
+        cutadapt -g TANACYTCNGGRTGNCCRAARAAYCA...GGRGGRTANANWGTYCAWCYWGTWCC \
+        -o {output} {input} -e 0.2 -m 293 -M 333 --discard-untrimmed > {log} 2>&1
+        """
+
+rule concatenate_reads:
+    input:
+        forward="cut_primers/coi_for_Sample_name.fastq",
+        reverse_reads="cut_primers/coi_rev_Sample_name.fastq"
+    output:
+        "final_reads/reads_coi_Sample_name.fastq"
+    shell:
+        """
+        cat {input.forward} {input.reverse_reads} > {output}
+        """
