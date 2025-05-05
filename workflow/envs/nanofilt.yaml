@@ -1,8 +1,6 @@
-name: qc
+name: nanofilt
 channels:
   - bioconda
   - conda-forge
 dependencies:
   - nanofilt
-  - nanoplot
-  - cutadapt

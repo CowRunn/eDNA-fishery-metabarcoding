@@ -5,11 +5,11 @@ rule all:
 
 rule check_quality:
     input:
-        fastq="Data/fastq/calvin_5A1.fastq"
+        fastq="/home/matinnu/d_drive/wsl_disk/igf/igf-primers-hands-on_backup/session-2/notebooks/output_data/barcode01.fastq.gz"
     output:
         directory("data/interim/output_plot_Sample_name")
     conda:
-        "envs/qc.yaml"
+        "envs/nanoplot.yaml"
     log:
         "logs/check_quality.log"
     shell:
@@ -19,11 +19,11 @@ rule check_quality:
 
 rule filter_reads:
     input:
-        fastq="Data/fastq/calvin_5A1.fastq"
+        fastq="/home/matinnu/d_drive/wsl_disk/igf/igf-primers-hands-on_backup/session-2/notebooks/output_data/barcode01.fastq.gz"
     output:
         "coi_reads_length_Sample_name.fastq"
     conda:
-        "envs/qc.yaml"
+        "envs/nanofilt.yaml"
     log:
         "logs/filter_reads.log"
     shell:
@@ -37,7 +37,7 @@ rule cutadapt_forward:
     output:
         "cut_primers/coi_for_Sample_name.fastq"
     conda:
-        "envs/qc.yaml"
+        "envs/cutadapt.yaml"
     log:
         "logs/cutadapt_forward.log"
     shell:
